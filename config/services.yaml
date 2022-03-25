@@ -1,0 +1,22 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+            - '../src/Tests/'
+            - '../src/**/Model/'
+
+    App\Doctrine\Listener\InlinedPropertiesListener:
+        tags: [ 'doctrine.event_subscriber' ]
+
+    serializer_doctrine:
+        alias: serializer
+        public: true

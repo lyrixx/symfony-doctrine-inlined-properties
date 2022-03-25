@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello{% endblock %}
+
+{% block body %}
+    <h1>List of pages</h1>
+
+    <ul>
+        {% for page in pages %}
+            <li>
+                <a href="{{ url('page', {id: page.id} ) }}">{{ page.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <footer>
+    <a href="{{ url('admin_project_new') }}">Add a new page</a>
+    </footer>
+
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ page.title}}{% endblock %}
+
+{% block body %}
+    <h1>{{ page.title }}</h1>
+
+    {% for i, block in page.blocks %}
+        {% set config = block.configuration %}
+        <div style="border: 1px solid grey; margin-bottom: 1em; padding:1em;">
+            <h2><i>{{ block.name }}</i> <small>(type: <code>{{ constant('class', config) }}<code>)</small></h2>
+            <div style="border: 1px solid chartreuse; margin-bottom:1em;">
+                {% if constant('class', config) == 'App\\Model\\Block\\TextBlock' %}
+                    <p>{{ config.content }}</p>
+                {% elseif constant('class', config) == 'App\\Model\\Block\\ImageBlock' %}
+                    <img src="{{ config.src }}" alt="{{ config.alt }}">
+                {% elseif constant('class', config) == 'App\\Model\\Block\\TextAndImageBlock' %}
+                    <p>{{ config.text.content }}</p>
+                    <img src="{{ config.image.src }}" alt="{{ config.image.alt }}">
+                {% endif %}
+            </div>
+
+            <hr>
+            Edit the block:
+            <ul>
+                <li><a href="{{ url('admin_page_edit', {id: page.id, i}) }}">Edit</a></li>
+                <li><a href="{{ url('admin_page_replace', {id: page.id, i}) }}">Replace</a></li>
+                <li><a href="{{ url('admin_page_nothing', {id: page.id, i}) }}">Do nothing</a></li>
+            </ul>
+        </div>
+    {% endfor %}
+
+    <footer>
+        <a href="{{ url('admin_project_new') }}">Add a new page</a>
+    </footer>
+{% endblock %}
