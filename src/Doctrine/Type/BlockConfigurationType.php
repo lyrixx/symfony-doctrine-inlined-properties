@@ -14,8 +14,7 @@ final class BlockConfigurationType extends JsonType
 {
     private static NormalizerInterface & DenormalizerInterface $serializer;
 
-    // We use a public static method because doctrine does not let use use the
-    // constructor.
+    // We use a public static method because doctrine does not let us use the constructor.
     public static function setSerializer(NormalizerInterface & DenormalizerInterface $serializer)
     {
         self::$serializer = $serializer;
