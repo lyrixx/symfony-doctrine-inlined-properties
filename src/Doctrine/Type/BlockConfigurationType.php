@@ -47,4 +47,9 @@ final class BlockConfigurationType extends JsonType
             return new InvalidConfiguration($rawConfiguration);
         }
     }
+
+    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
+    {
+        return true;
+    }
 }
